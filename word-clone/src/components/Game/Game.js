@@ -23,7 +23,7 @@ function Game() {
       <input
         id="guess-input"
         type="text"
-        minLength={4}
+        pattern="\w{5,5}"
         value={guess}
         onChange={event => setGuess(event.target.value.trim().toUpperCase())}
       />
