@@ -5,6 +5,8 @@ import { WORDS } from '../../data';
 
 import GuessResults from './GuessResults';
 
+const NUM_OF_GUESSES_ALLOWED = 5;
+
 // Pick a random word on every pageload.
 const answer = sample(WORDS);
 // To make debugging easier, we'll log the solution in the console.
@@ -18,6 +20,9 @@ function Game() {
 
   const handleGuessSubmit = (event) => {
     event.preventDefault();
+    if (guesses.length === NUM_OF_GUESSES_ALLOWED) {
+      return;
+    }
     setGuesses(prevGuesses => prevGuesses.concat({ id: crypto.randomUUID(), letters: [...currentGuess].map(letter => ({ id: crypto.randomUUID(), value: letter })) }))
     setCurrentGuess('');
   }
