@@ -16,8 +16,6 @@ function Game() {
   const [guesses, setGuesses] = React.useState([]);
   const [currentGuess, setCurrentGuess] = React.useState('');
 
-  console.log({ guesses })
-
   const handleGuessSubmit = (event) => {
     event.preventDefault();
     if (guesses.length === NUM_OF_GUESSES_ALLOWED) {

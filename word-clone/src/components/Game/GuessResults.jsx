@@ -1,11 +1,15 @@
 import Guess from './Guess';
 
+import { range } from '../../utils';
+
 export default function GuessResults({ guesses }) {
+  console.log(range(0, 5));
+
   return (
     <div className="guess-results">
       {
-        guesses.map(({ id, letters }) => (
-          <Guess key={id} letters={letters} />
+        range(0, 5).map(index => (
+          <Guess key={index} letters={guesses[index] || []} />
         ))
       }
     </div>
