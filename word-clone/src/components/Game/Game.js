@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { sample } from '../../utils';
+import { guessesArray, sample } from '../../utils';
 import { WORDS } from '../../data';
 
 import GuessResults from './GuessResults';
@@ -13,20 +13,29 @@ const answer = sample(WORDS);
 console.info({ answer });
 
 function Game() {
-  const [guesses, setGuesses] = React.useState([]);
+  const [guesses, setGuesses] = React.useState(guessesArray);
   const [currentGuess, setCurrentGuess] = React.useState('');
 
   const handleGuessSubmit = (event) => {
     event.preventDefault();
-    if (guesses.length === NUM_OF_GUESSES_ALLOWED) {
+    const currentIndex = guesses.findIndex(guess => Array.isArray(guess)) + 1
+    if (currentIndex === NUM_OF_GUESSES_ALLOWED) {
       return;
     }
-    setGuesses(prevGuesses => prevGuesses.concat({ id: crypto.randomUUID(), letters: [...currentGuess].map(letter => ({ id: crypto.randomUUID(), value: letter })) }))
+
+    setGuesses(prevGuesses => {
+      const newGuesses = [...prevGuesses];
+
+      newGuesses[currentIndex] = [...currentGuess]
+
+      return newGuesses;
+    })
     setCurrentGuess('');
   }
 
   return (
     <div>
+      <GuessResults guesses={guesses} />
       <form onSubmit={handleGuessSubmit} className="guess-input-wrapper">
         <label htmlFor="guess-input">Enter guess:</label>
         <input
@@ -37,7 +46,6 @@ function Game() {
           onChange={event => setCurrentGuess(event.target.value.trim().toUpperCase())}
         />
       </form>
-      <GuessResults guesses={guesses} />
     </div>
   )
 }
