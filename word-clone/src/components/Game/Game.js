@@ -18,7 +18,9 @@ function Game() {
 
   const handleGuessSubmit = (event) => {
     event.preventDefault();
-    const currentIndex = guesses.findIndex(guess => Array.isArray(guess)) + 1
+    const currentIndex = guesses.findLastIndex(guess => Array.isArray(guess)) + 1;
+
+    // console.log({ currentIndex });
     if (currentIndex === NUM_OF_GUESSES_ALLOWED) {
       return;
     }
