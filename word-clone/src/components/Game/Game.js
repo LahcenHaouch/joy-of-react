@@ -2,11 +2,10 @@ import React from 'react';
 
 import { guessesArray, sample } from '../../utils';
 import { WORDS } from '../../data';
+import { NUM_OF_GUESSES_ALLOWED } from '../../constants';
 
 import GuessResults from './GuessResults';
 import GuessInput from './GuessInput';
-
-const NUM_OF_GUESSES_ALLOWED = 5;
 
 // Pick a random word on every pageload.
 const answer = sample(WORDS);

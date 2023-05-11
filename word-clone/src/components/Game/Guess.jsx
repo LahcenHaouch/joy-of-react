@@ -1,7 +1,11 @@
+import * as React from 'react';
+
 import { guessesArray } from "../../utils";
 
 export default function Guess({ letters }) {
-  const guessDisplay = Array.isArray(letters) ? letters : guessesArray;
+  const guessLetterArray = React.useMemo(() => guessesArray.slice(0, guessesArray.length - 1), [guessesArray]);
+
+  const guessDisplay = Array.isArray(letters) ? letters : guessLetterArray;
 
   return (
     <p className="guess">

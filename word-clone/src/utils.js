@@ -1,3 +1,5 @@
+import { NUM_OF_GUESSES_ALLOWED } from "./constants";
+
 export const sample = (arr) => {
   return arr[Math.floor(Math.random() * arr.length)];
 };
@@ -14,5 +16,4 @@ export const range = (start, end, step = 1) => {
   return output;
 };
 
-export const NUM_OF_GUESSES_ALLOWED = 5;
-export const guessesArray = range(0, 5);
+export const guessesArray = range(0, NUM_OF_GUESSES_ALLOWED);
