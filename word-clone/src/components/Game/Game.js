@@ -16,7 +16,7 @@ function Game() {
   const [guesses, setGuesses] = React.useState(guessesArray);
 
   const handleGuessSubmit = (newGuess) => {
-    const currentIndex = guesses.findLastIndex(guess => Array.isArray(guess)) + 1;
+    const currentIndex = guesses.findLastIndex(guess => typeof guess === 'string') + 1;
 
     if (currentIndex === NUM_OF_GUESSES_ALLOWED) {
       return;
@@ -25,7 +25,7 @@ function Game() {
     setGuesses(prevGuesses => {
       const newGuesses = [...prevGuesses];
 
-      newGuesses[currentIndex] = [...newGuess]
+      newGuesses[currentIndex] = newGuess
 
       return newGuesses;
     })
@@ -33,7 +33,7 @@ function Game() {
 
   return (
     <div>
-      <GuessResults guesses={guesses} />
+      <GuessResults answer={answer} guesses={guesses} />
       <GuessInput handleGuessSubmit={handleGuessSubmit} />
     </div>
   )
