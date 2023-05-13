@@ -6,6 +6,7 @@ import { NUM_OF_GUESSES_ALLOWED } from '../../constants';
 
 import GuessResults from './GuessResults';
 import GuessInput from './GuessInput';
+import WinnerBanner from './WinnerBanner';
 
 // Pick a random word on every pageload.
 const answer = sample(WORDS);
@@ -14,6 +15,9 @@ console.info({ answer });
 
 function Game() {
   const [guesses, setGuesses] = React.useState(guessesArray);
+
+  const currentGuessIndex = guesses.findLastIndex(guess => typeof guess === 'string');
+  const currentGuess = guesses[currentGuessIndex];
 
   const handleGuessSubmit = (newGuess) => {
     const currentIndex = guesses.findLastIndex(guess => typeof guess === 'string') + 1;
@@ -33,6 +37,11 @@ function Game() {
 
   return (
     <div>
+      {
+        currentGuess === answer && (
+          <WinnerBanner numberOfGuesses={currentGuessIndex + 1} />
+        )
+      }
       <GuessResults answer={answer} guesses={guesses} />
       <GuessInput handleGuessSubmit={handleGuessSubmit} />
     </div>
