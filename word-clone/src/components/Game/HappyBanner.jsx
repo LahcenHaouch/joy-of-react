@@ -1,4 +1,4 @@
-export default function WinnerBanner({ numberOfGuesses }) {
+export default function HappyBanner({ numberOfGuesses }) {
   return (
     <div className="happy banner">
       <p>

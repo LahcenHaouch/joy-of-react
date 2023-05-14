@@ -6,7 +6,8 @@ import { NUM_OF_GUESSES_ALLOWED } from '../../constants';
 
 import GuessResults from './GuessResults';
 import GuessInput from './GuessInput';
-import WinnerBanner from './WinnerBanner';
+import HappyBanner from './HappyBanner';
+import SadBanner from './SadBanner';
 
 // Pick a random word on every pageload.
 const answer = sample(WORDS);
@@ -18,6 +19,8 @@ function Game() {
 
   const currentGuessIndex = guesses.findLastIndex(guess => typeof guess === 'string');
   const currentGuess = guesses[currentGuessIndex];
+  const userHasWon = currentGuess === answer;
+  const gameHasEnded = userHasWon || currentGuessIndex === guesses.length - 1;
 
   const handleGuessSubmit = (newGuess) => {
     const currentIndex = guesses.findLastIndex(guess => typeof guess === 'string') + 1;
@@ -38,8 +41,13 @@ function Game() {
   return (
     <div>
       {
-        currentGuess === answer && (
-          <WinnerBanner numberOfGuesses={currentGuessIndex + 1} />
+        userHasWon && (
+          <HappyBanner numberOfGuesses={currentGuessIndex + 1} />
+        )
+      }
+      {
+        gameHasEnded && !userHasWon && (
+          <SadBanner answer={answer} />
         )
       }
       <GuessResults answer={answer} guesses={guesses} />
