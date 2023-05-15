@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export default function GuessInput({ handleGuessSubmit }) {
+export default function GuessInput({ handleGuessSubmit, disabled }) {
   const [guess, setGuess] = React.useState('');
 
   function handleSubmit(event) {
@@ -18,6 +18,7 @@ export default function GuessInput({ handleGuessSubmit }) {
         pattern="\w{5,5}"
         value={guess}
         onChange={event => setGuess(event.target.value.trim().toUpperCase())}
+        disabled={disabled}
       />
     </form>
   )

@@ -23,6 +23,10 @@ function Game() {
   const gameHasEnded = userHasWon || currentGuessIndex === guesses.length - 1;
 
   const handleGuessSubmit = (newGuess) => {
+    if (gameHasEnded) {
+      return;
+    }
+
     const currentIndex = guesses.findLastIndex(guess => typeof guess === 'string') + 1;
 
     if (currentIndex === NUM_OF_GUESSES_ALLOWED) {
@@ -51,7 +55,7 @@ function Game() {
         )
       }
       <GuessResults answer={answer} guesses={guesses} />
-      <GuessInput handleGuessSubmit={handleGuessSubmit} />
+      <GuessInput handleGuessSubmit={handleGuessSubmit} disabled={gameHasEnded} />
     </div>
   )
 }
